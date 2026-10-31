@@ -189,6 +189,7 @@ h1 em { font-style: normal; color: var(--ball); }
 .price__amount { margin: 0; display: flex; justify-content: center; align-items: baseline; gap: 8px; color: var(--brand); }
 .price__amount span { font: 900 clamp(64px, 12vw, 84px)/1 var(--f-display); font-stretch: 112%; letter-spacing: -.03em; }
 .price__amount small { font-weight: 700; font-size: 18px; color: var(--muted); }
+.price__vat { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
 .price__setup { display: inline-block; margin: 16px 0 0; padding: 8px 14px; border-radius: 12px; background: var(--ball); color: var(--brand); font-size: 15px; }
 .price__setup s { opacity: .65; }
 .checks--price { gap: 12px; margin-bottom: 28px; }
