@@ -20,9 +20,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="sales.css">
+<script>
+  // Animations : activées seulement si le visiteur n'a pas demandé à réduire les mouvements.
+  // Filet de sécurité : si motion.js ne démarre pas, tout s'affiche normalement.
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("anim");
+    setTimeout(function () { if (!window.__motion) document.documentElement.classList.remove("anim"); }, 2500);
+  }
+</script>
 </head>
 <body>
 
+<div class="progress" aria-hidden="true"></div>
 <header class="top">
   <div class="wrap top__in">
     <a class="logo" href="#"><span class="logo__ball" aria-hidden="true"></span><span>PCW <b>Padel Coach</b></span></a>
@@ -54,11 +63,12 @@
         </ul>
       </div>
       <div class="hero__phones" aria-hidden="true">
+        <span class="hero__glow"></span>
         <figure class="phone phone--back"><img src="media/backoffice.jpg" alt="" width="500" height="1082"></figure>
         <figure class="phone phone--front"><img src="media/site.jpg" alt="" width="500" height="1082"></figure>
         <div class="float-card">
           <span class="float-card__icon">✓</span>
-          <span><b>Nouvelle réservation</b><small>Mardi 19&nbsp;h&nbsp;30 · Coaching individuel</small></span>
+          <span class="float-card__text"><b>Nouvelle réservation</b><small>Mardi 19&nbsp;h&nbsp;30 · Coaching individuel</small></span>
         </div>
       </div>
     </div>
@@ -348,5 +358,6 @@
 <a class="mobile-cta btn btn--ball" href="#contact">Je veux mon site</a>
 
 <script src="sales.js"></script>
+<script src="motion.js"></script>
 </body>
 </html>
