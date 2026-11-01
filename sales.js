@@ -3,6 +3,26 @@
 // Clé d'accès : à créer sur https://web3forms.com avec l'adresse qui doit recevoir les demandes.
 const WEB3FORMS_KEY = "4273a7e4-66ef-4071-9618-dbbcfd80f02b";
 
+// Base Supabase de PCW Padel Coach (à remplir à la mise en production) :
+// les avis que les coachs écrivent depuis leur espace, une fois validés, s'affichent automatiquement.
+const PCW_SUPABASE = { url: "", anonKey: "" };
+
+// Avis de vos clients (section « Ils l'utilisent »), en plus de ceux écrits par les coachs dans leur espace.
+// La section reste cachée tant qu'il n'y a aucun avis : ajoutez uniquement de vrais avis,
+// avec l'accord du coach, et vérifiez qu'il est d'accord pour être cité avec son nom et sa photo.
+// Exemple d'avis (à copier entre les crochets, un bloc par coach, séparés par une virgule) :
+//   {
+//     nom: "Prénom N.",
+//     metier: "Coach de padel",
+//     lieu: "Toulouse · Padel Club Garonne",
+//     note: 5,                              // de 1 à 5
+//     texte: "Ce que le coach dit du service, dans ses mots.",
+//     photo: "media/avis/prenom.jpg",       // facultatif : sans photo, les initiales s'affichent
+//     depuis: "mars 2027",                  // facultatif : client depuis…
+//   },
+const AVIS = [
+];
+
 (() => {
   const form = document.getElementById("lead-form");
   const alertBox = document.getElementById("lead-alert");
@@ -82,9 +102,49 @@ const WEB3FORMS_KEY = "4273a7e4-66ef-4071-9618-dbbcfd80f02b";
     // Les commandes natives reviennent dès que la vidéo démarre.
     const showOverlay = () => { play.hidden = false; vid.controls = false; };
     showOverlay();
-    play.addEventListener("click", () => { play.hidden = true; vid.controls = true; vid.play().catch(showOverlay); vid.focus(); });
-    vid.addEventListener("play", () => { play.hidden = true; vid.controls = true; });
-    vid.addEventListener("ended", showOverlay);
+    // Les étiquettes autour de la vidéo s'effacent dès qu'elle démarre.
+    const stage = document.querySelector(".video-stage");
+    const playing = (on) => stage && stage.classList.toggle("is-playing", on);
+    play.addEventListener("click", () => { play.hidden = true; vid.controls = true; playing(true); vid.play().catch(() => { showOverlay(); playing(false); }); vid.focus(); });
+    vid.addEventListener("play", () => { play.hidden = true; vid.controls = true; playing(true); });
+    vid.addEventListener("ended", () => { showOverlay(); playing(false); });
+  }
+
+  // Avis clients : ceux validés dans l'espace coach + ceux de la liste AVIS. Section cachée s'il n'y en a aucun.
+  const avisSec = document.getElementById("avis");
+  const esc = (t) => String(t ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const initials = (n) => String(n).split(/\s+/).map((w) => w[0] || "").join("").slice(0, 2).toUpperCase();
+  const safePhoto = (u) => /^(https:\/\/|media\/)/.test(String(u || "")) ? u : "";
+  const stars = (n) => {
+    const k = Math.max(1, Math.min(5, Math.round(n || 5)));
+    return `<span class="review__stars" role="img" aria-label="${k} sur 5">${"<i></i>".repeat(k)}${'<i class="off"></i>'.repeat(5 - k)}</span>`;
+  };
+  const renderAvis = (list) => {
+    list = list.filter((a) => a && a.nom && a.texte);
+    if (!avisSec || !list.length) return;
+    const avg = list.reduce((s, a) => s + Math.max(1, Math.min(5, a.note || 5)), 0) / list.length;
+    document.getElementById("avis-score").innerHTML =
+      `<b>${avg.toFixed(1).replace(".", ",")}</b><span>${stars(avg)}<small>${list.length} avis de coach${list.length > 1 ? "s" : ""}</small></span>`;
+    document.getElementById("avis-list").innerHTML = list.map((a) => `<figure class="review">
+        ${stars(a.note)}
+        <blockquote>${esc(a.texte)}</blockquote>
+        <figcaption>
+          ${safePhoto(a.photo) ? `<img class="review__ph" src="${esc(a.photo)}" alt="" width="48" height="48" loading="lazy">` : `<span class="review__ph" aria-hidden="true">${esc(initials(a.nom))}</span>`}
+          <span><b>${esc(a.nom)}</b><small>${esc([a.metier, a.lieu].filter(Boolean).join(" · "))}</small>${a.depuis ? `<small>Client depuis ${esc(a.depuis)}</small>` : ""}</span>
+        </figcaption>
+      </figure>`).join("");
+    avisSec.hidden = false;
+    if (window.__motionReveal) window.__motionReveal(avisSec);
+  };
+  renderAvis(AVIS.slice());
+  if (PCW_SUPABASE.url && PCW_SUPABASE.anonKey) {
+    fetch(`${PCW_SUPABASE.url.replace(/\/$/, "")}/rest/v1/rpc/public_coach_testimonials`, {
+      method: "POST",
+      headers: { apikey: PCW_SUPABASE.anonKey, Authorization: `Bearer ${PCW_SUPABASE.anonKey}`, "Content-Type": "application/json" },
+      body: "{}",
+    }).then((r) => (r.ok ? r.json() : [])).then((rows) => {
+      if (Array.isArray(rows) && rows.length) renderAvis(rows.concat(AVIS));
+    }).catch(() => { /* la page reste complète sans les avis */ });
   }
 
   // Bouton fixe sur téléphone : masqué tant que l'accroche ou le formulaire sont visibles.

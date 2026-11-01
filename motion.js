@@ -78,6 +78,8 @@
   $$(".wide").forEach((w) => { mark($$(".wide__text", w), "left"); mark($$(".browser", w), "tilt", 0, 120); });
   mark($$(".mini"), "pop", 100);
   mark($$(".steps li"), "up", 180, 100);
+  mark($$(".avis-score"), "pop", 0, 150);
+  mark($$(".review"), "up", 140, 100);
   mark($$(".price"), "up");
   mark($$(".checks--price li"), "up", 45, 300);
   mark($$(".price__math"), "zoom", 0, 500);
@@ -105,6 +107,12 @@
     }
   }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
   $$("[data-reveal]").forEach((el) => io.observe(el));
+  // Contenu ajouté après coup (avis chargés depuis la base) : même apparition.
+  window.__motionReveal = (rootEl) => {
+    mark($$(".avis-score", rootEl), "pop", 0, 150);
+    mark($$(".review", rootEl), "up", 140, 100);
+    $$("[data-reveal]:not(.is-in)", rootEl).forEach((el) => io.observe(el));
+  };
 
   // ---------- Barre de progression et en-tête ----------
   const bar = document.querySelector(".progress");
