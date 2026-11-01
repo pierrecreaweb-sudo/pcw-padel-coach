@@ -80,7 +80,7 @@
   mark($$(".steps li"), "up", 180, 100);
   mark($$(".price"), "up");
   mark($$(".checks--price li"), "up", 45, 300);
-  mark($$(".price__math"), "up", 0, 200);
+  mark($$(".price__math"), "zoom", 0, 500);
   mark($$(".faq details"), "up", 55);
   mark($$(".contact__intro"), "left");
   mark($$(".contact__list li"), "left", 110, 300);
