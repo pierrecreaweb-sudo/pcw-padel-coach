@@ -419,7 +419,7 @@ html.anim main { overflow-x: clip; }
 .strike { position: relative; white-space: nowrap; }
 .strike::after { content: ""; position: absolute; left: -2px; right: -2px; top: 54%; height: .09em; border-radius: 4px; background: #E5484D; transform-origin: 0 50%; }
 .hl { position: relative; white-space: nowrap; z-index: 0; }
-.hl::before { content: ""; position: absolute; z-index: -1; left: -.12em; right: -.12em; bottom: .02em; height: .42em; border-radius: .2em; background: var(--ball); transform-origin: 0 50%; }
+.hl::before { content: ""; position: absolute; z-index: -1; left: -.14em; right: -.14em; top: .12em; bottom: .02em; border-radius: .22em; background: var(--ball); transform-origin: 0 50%; }
 html.anim .h2 .strike::after, html.anim .h2 .hl::before { scale: 0 1; transition: scale .7s var(--ease); }
 html.anim .h2.is-in .strike::after { scale: 1 1; transition-delay: .7s; }
 html.anim .h2.is-in .hl::before { scale: 1 1; transition-delay: 1.2s; }
@@ -630,3 +630,44 @@ html.anim .steps li.is-active .steps__ic--build .b3 { animation-delay: .5s; }
 /* Icône 3 : avion en papier qui s'envole */
 html.anim .steps li.is-active .steps__ic--send { animation: fly 3s var(--ease) infinite; }
 @keyframes fly { 0% { opacity: 0; translate: -14px 10px; } 20%, 60% { opacity: 1; translate: none; } 85% { opacity: 0; translate: 14px -12px; } 100% { opacity: 0; translate: -14px 10px; } }
+
+
+/* Étiquettes de la vidéo : effacées pendant la lecture */
+.video-stage.is-playing .vchip { opacity: 0 !important; scale: .6 !important; pointer-events: none; transition: opacity .35s ease, scale .4s var(--ease) !important; transition-delay: 0s !important; }
+
+/* ---------- Avis des coachs clients ---------- */
+#avis { position: relative; overflow: hidden; }
+#avis::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .08;
+  background: linear-gradient(90deg, transparent calc(50% - 1px), #fff calc(50% - 1px), #fff calc(50% + 1px), transparent calc(50% + 1px)); }
+#avis .wrap { position: relative; }
+.avis-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 32px; margin-bottom: 40px; }
+.avis-head .h2 { margin: 0; }
+.avis-score { display: flex; align-items: center; gap: 14px; margin: 0; }
+.avis-score > b { font: 900 56px/1 var(--f-display); font-stretch: 112%; color: var(--ball); }
+.avis-score small { display: block; margin-top: 4px; color: var(--on-dark-muted); font-size: 14px; font-weight: 600; }
+.reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.review { position: relative; display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 28px; border-radius: 20px; background: var(--card); color: var(--ink); box-shadow: 0 24px 50px rgba(0, 0, 0, .25); }
+.review::before { content: "“"; position: absolute; top: 6px; right: 22px; font: 900 96px/1 var(--f-display); color: var(--soft); pointer-events: none; }
+.review blockquote { position: relative; margin: 0; flex: 1; font-size: 17px; line-height: 1.6; }
+.review figcaption { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+.review figcaption b { display: block; color: var(--brand); }
+.review figcaption small { display: block; color: var(--muted); font-size: 14px; line-height: 1.4; }
+.review__ph { width: 48px; height: 48px; flex: none; border-radius: 50%; object-fit: cover; display: grid; place-items: center; background: var(--brand); color: var(--ball); font: 800 17px/1 var(--f-display); }
+.review__stars { display: inline-flex; gap: 3px; }
+.review__stars i { width: 18px; height: 18px; background: #FFB800; clip-path: polygon(50% 0, 61.8% 35.3%, 100% 35.3%, 69.1% 57.1%, 80.9% 92.7%, 50% 70.6%, 19.1% 92.7%, 30.9% 57.1%, 0 35.3%, 38.2% 35.3%); }
+.review__stars i.off { background: #D9E1EC; }
+.avis-score .review__stars i { width: 20px; height: 20px; }
+.avis-score .review__stars i.off { background: rgba(255, 255, 255, .2); }
+@media (max-width: 700px) {
+  .reviews { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 0 calc(-1 * var(--gr)) 0 calc(-1 * var(--gl)); padding: 6px var(--gr) 24px var(--gl); scrollbar-width: none; }
+  .reviews::-webkit-scrollbar { display: none; }
+  .review { flex: 0 0 86%; scroll-snap-align: center; padding: 24px; }
+}
+@media (hover: hover) { .review { transition: transform .3s var(--ease), box-shadow .3s; } .review:hover { transform: translateY(-6px) rotate(-.4deg); box-shadow: 0 34px 60px rgba(0, 0, 0, .35); } }
+html.anim .review__stars i { scale: 0; rotate: -72deg; transition: scale .45s var(--spring), rotate .45s var(--ease); }
+html.anim .is-in .review__stars i, html.anim .avis-score.is-in .review__stars i { scale: 1; rotate: none; }
+html.anim .is-in .review__stars i:nth-child(1) { transition-delay: calc(var(--d, 0ms) + 250ms); }
+html.anim .is-in .review__stars i:nth-child(2) { transition-delay: calc(var(--d, 0ms) + 330ms); }
+html.anim .is-in .review__stars i:nth-child(3) { transition-delay: calc(var(--d, 0ms) + 410ms); }
+html.anim .is-in .review__stars i:nth-child(4) { transition-delay: calc(var(--d, 0ms) + 490ms); }
+html.anim .is-in .review__stars i:nth-child(5) { transition-delay: calc(var(--d, 0ms) + 570ms); }

@@ -104,7 +104,17 @@ const AVIS = [
     showOverlay();
     // Les étiquettes autour de la vidéo s'effacent dès qu'elle démarre.
     const stage = document.querySelector(".video-stage");
-    const playing = (on) => stage && stage.classList.toggle("is-playing", on);
+    // Fait aussi en style direct : fonctionne même si le navigateur garde une ancienne feuille de style en cache.
+    const chips = Array.from(document.querySelectorAll(".vchip"));
+    const playing = (on) => {
+      if (stage) stage.classList.toggle("is-playing", on);
+      chips.forEach((c) => {
+        c.style.transition = "opacity .35s ease, scale .4s ease";
+        c.style.opacity = on ? "0" : "";
+        c.style.scale = on ? ".6" : "";
+        c.style.pointerEvents = on ? "none" : "";
+      });
+    };
     play.addEventListener("click", () => { play.hidden = true; vid.controls = true; playing(true); vid.play().catch(() => { showOverlay(); playing(false); }); vid.focus(); });
     vid.addEventListener("play", () => { play.hidden = true; vid.controls = true; playing(true); });
     vid.addEventListener("ended", () => { showOverlay(); playing(false); });
