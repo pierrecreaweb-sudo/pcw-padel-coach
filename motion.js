@@ -34,12 +34,14 @@
   requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add("is-loaded")));
 
   // ---------- Compteurs ----------
-  const countUp = (el, to, suffix, dur = 1200) => {
+  const fmt = new Intl.NumberFormat("fr-FR");
+  const countUp = (el, to, suffix, dur = 1200, grouped = false) => {
     const start = performance.now();
     const step = (t) => {
       const k = Math.min(1, (t - start) / dur);
       const e = 1 - Math.pow(1 - k, 3);
-      el.textContent = Math.round(to * e) + suffix;
+      const v = Math.round(to * e);
+      el.textContent = (grouped ? fmt.format(v) : v) + suffix;
       if (k < 1) requestAnimationFrame(step);
     };
     el.textContent = "0" + suffix;
@@ -65,7 +67,7 @@
   });
   $$(".sec").forEach((sec) => mark($$(".kicker, .h2", sec), "up", 90));
   mark($$(".pain"), "up", 130, 100);
-  mark($$(".video"), "zoom");
+  mark($$(".video-stage"), "up");
   mark($$("#video .center"), "up", 0, 150);
   $$(".feat").forEach((f) => {
     const rev = f.classList.contains("feat--rev");
@@ -83,7 +85,6 @@
   mark($$(".contact__intro"), "left");
   mark($$(".contact__list li"), "left", 110, 300);
   mark($$("#lead-form"), "right", 0, 120);
-  mark($$(".steps"), "line");
 
   const io = new IntersectionObserver((entries) => {
     for (const en of entries) {
@@ -94,6 +95,8 @@
       // Après l'entrée, plus de délai : les survols restent instantanés.
       const d = parseFloat(el.style.getPropertyValue("--d")) || 0;
       setTimeout(() => el.style.setProperty("--d", "0ms"), d + 1300);
+      const stat = el.querySelector(".fx-stat b[data-count]");
+      if (stat) setTimeout(() => countUp(stat, +stat.dataset.count, " €", 1400, true), 700);
       if (el.classList.contains("price")) {
         const span = el.querySelector(".price__amount span");
         const c = span && counterOf(span);
@@ -107,6 +110,10 @@
   const bar = document.querySelector(".progress");
   const top = document.querySelector(".top");
   let ticking = false;
+  const clamp = (v) => Math.max(0, Math.min(1, v));
+  const video = document.querySelector(".video");
+  const steps = document.querySelector(".steps");
+  const stepItems = steps ? $$("li", steps) : [];
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
@@ -114,10 +121,31 @@
       const max = document.documentElement.scrollHeight - innerHeight;
       bar.style.setProperty("--p", max > 0 ? (scrollY / max).toFixed(4) : 0);
       top.classList.toggle("is-scrolled", scrollY > 20);
+      // Vidéo : s'agrandit en arrivant au centre de l'écran.
+      if (video) {
+        const r = video.getBoundingClientRect();
+        video.style.setProperty("--vp", clamp((innerHeight - r.top) / (innerHeight * 0.65)).toFixed(3));
+      }
+      // Étapes : la ligne se remplit au fil du défilement et allume chaque étape.
+      if (steps) {
+        const r = steps.getBoundingClientRect();
+        const sp = clamp((innerHeight * 0.78 - r.top) / (r.height * 0.75));
+        steps.style.setProperty("--sp", sp.toFixed(3));
+        const n = stepItems.length;
+        stepItems.forEach((li, k) => li.classList.toggle("is-active", sp >= (n > 1 ? k / (n - 1) : 0) - 0.02 && sp > 0.02));
+      }
       ticking = false;
     });
   };
   addEventListener("scroll", onScroll, { passive: true });
+  // Téléphone : fin de la ligne verticale sur le dernier numéro.
+  const setLineEnd = () => {
+    if (!steps || !stepItems.length) return;
+    const last = stepItems[stepItems.length - 1];
+    steps.style.setProperty("--lend", `${steps.offsetHeight - (last.offsetTop + 49)}px`);
+  };
+  addEventListener("resize", () => { setLineEnd(); onScroll(); });
+  setLineEnd();
   onScroll();
 
   // ---------- Téléphones de l'accroche qui suivent la souris ----------

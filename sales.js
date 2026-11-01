@@ -75,6 +75,18 @@ const WEB3FORMS_KEY = "4273a7e4-66ef-4071-9618-dbbcfd80f02b";
     }
   });
 
+  // Vidéo : grand bouton de lecture par-dessus l'aperçu.
+  const vid = document.querySelector(".video video");
+  const play = document.querySelector(".video__play");
+  if (vid && play) {
+    // Les commandes natives reviennent dès que la vidéo démarre.
+    const showOverlay = () => { play.hidden = false; vid.controls = false; };
+    showOverlay();
+    play.addEventListener("click", () => { play.hidden = true; vid.controls = true; vid.play().catch(showOverlay); vid.focus(); });
+    vid.addEventListener("play", () => { play.hidden = true; vid.controls = true; });
+    vid.addEventListener("ended", showOverlay);
+  }
+
   // Bouton fixe sur téléphone : masqué tant que l'accroche ou le formulaire sont visibles.
   const cta = document.querySelector(".mobile-cta");
   const watched = [document.querySelector(".hero"), document.getElementById("contact")];

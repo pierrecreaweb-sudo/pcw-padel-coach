@@ -78,19 +78,38 @@
   <section class="sec">
     <div class="wrap">
       <p class="kicker">Le quotidien d'un coach</p>
-      <h2 class="h2">Vous passez plus de temps à organiser vos cours qu'à les donner ?</h2>
+      <h2 class="h2">Vous passez plus de temps <span class="strike">à organiser vos cours</span> qu'à <span class="hl">les donner</span> ?</h2>
       <div class="pains">
         <article class="pain">
+          <div class="pain__visual pv-chat" aria-hidden="true">
+            <span class="pv-chat__time">23:12</span>
+            <span class="bubble bubble--wa"><i>WhatsApp</i>Tu as un créneau jeudi ?</span>
+            <span class="bubble bubble--sms"><i>SMS</i>Dispo demain 18 h ?</span>
+            <span class="bubble bubble--ig"><i>Instagram</i>C'est combien le cours ?</span>
+            <span class="pv-chat__count">+12</span>
+          </div>
           <span class="pain__n">01</span>
           <h3>Les messages partout</h3>
           <p>SMS, WhatsApp, Instagram, appels entre deux séances : chaque cours se négocie à la main et vous répondez le soir.</p>
         </article>
         <article class="pain">
+          <div class="pain__visual pv-cal" aria-hidden="true">
+            <span class="pv-cal__day">Lun</span><span class="pv-cal__day">Mar</span><span class="pv-cal__day">Mer</span><span class="pv-cal__day">Jeu</span><span class="pv-cal__day">Ven</span>
+            <i class="s on"></i><i class="s"></i><i class="s on"></i><i class="s s--hole"></i><i class="s on"></i>
+            <i class="s"></i><i class="s on s--double"></i><i class="s"></i><i class="s on"></i><i class="s"></i>
+            <i class="s on"></i><i class="s s--hole"></i><i class="s on"></i><i class="s"></i><i class="s on"></i>
+          </div>
           <span class="pain__n">02</span>
           <h3>Les oublis et les trous</h3>
           <p>Un élève oublie, un créneau reste vide, un autre se réserve deux fois. Votre planning tient dans votre tête.</p>
         </article>
         <article class="pain">
+          <div class="pain__visual pv-search" aria-hidden="true">
+            <span class="pv-search__bar"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="pv-search__q">coach padel toulouse</span></span>
+            <span class="pv-search__res"><b></b><i></i></span>
+            <span class="pv-search__res"><b></b><i></i></span>
+            <span class="pv-search__miss">Vous n'apparaissez pas</span>
+          </div>
           <span class="pain__n">03</span>
           <h3>Personne ne vous trouve</h3>
           <p>Sans site, les joueurs de votre ville qui cherchent « coach padel » sur Google tombent sur quelqu'un d'autre.</p>
@@ -104,10 +123,16 @@
     <div class="wrap">
       <p class="kicker kicker--ball">Présentation</p>
       <h2 class="h2">Le site et l'espace coach en 3 minutes</h2>
-      <div class="video">
-        <video controls playsinline preload="none" poster="media/presentation.jpg" width="1920" height="1080">
-          <source src="media/presentation.mp4" type="video/mp4">
-        </video>
+      <div class="video-stage">
+        <span class="vchip vchip--1" aria-hidden="true"><b>1</b>Votre site</span>
+        <span class="vchip vchip--2" aria-hidden="true"><b>2</b>La réservation</span>
+        <span class="vchip vchip--3" aria-hidden="true"><b>3</b>Votre espace coach</span>
+        <div class="video">
+          <video controls playsinline preload="none" poster="media/presentation.jpg" width="1920" height="1080">
+            <source src="media/presentation.mp4" type="video/mp4">
+          </video>
+          <button type="button" class="video__play" hidden><span class="video__btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="video__label">Lancer la présentation<small>3 minutes</small></span></button>
+        </div>
       </div>
       <p class="center"><a class="btn btn--ball" href="https://demo.pcwpadel.fr/" target="_blank" rel="noopener">Tester la démo sur mon téléphone</a></p>
     </div>
@@ -130,7 +155,9 @@
             <li>Votre présentation, vos <b>photos</b>, vos <b>prestations et prix</b>, vos <b>clubs</b>, les <b>avis</b> de vos élèves, un bouton <b>WhatsApp</b> et un formulaire de contact.</li>
           </ul>
         </div>
-        <figure class="feat__media"><div class="phone"><img src="media/reservation.jpg" alt="Choix de la prestation sur le site d'un coach" width="500" height="1082" loading="lazy"></div></figure>
+        <figure class="feat__media"><div class="phone phone--fx"><img src="media/reservation.jpg" alt="Choix de la prestation sur le site d'un coach" width="500" height="1082" loading="lazy">
+          <span class="fx fx-pick" aria-hidden="true"></span><span class="fx fx-tap" aria-hidden="true"></span>
+          <span class="fx fx-toast" aria-hidden="true"><b>✓</b><span>Séance réservée<small>Mardi 19 h 30</small></span></span></div></figure>
       </div>
 
       <div class="feat feat--rev">
@@ -146,7 +173,8 @@
             <li>S'installe sur l'écran d'accueil du téléphone, <b>comme une application</b>.</li>
           </ul>
         </div>
-        <figure class="feat__media"><div class="phone"><img src="media/backoffice.jpg" alt="Tableau de bord de l'espace coach" width="500" height="1082" loading="lazy"></div></figure>
+        <figure class="feat__media"><div class="phone phone--fx"><img src="media/backoffice.jpg" alt="Tableau de bord de l'espace coach" width="500" height="1082" loading="lazy">
+          <span class="fx fx-notif" aria-hidden="true"><span class="fx-notif__app"></span><span><b>Nouvelle demande</b><small>Hugo M. · jeudi 18 h · Duo</small></span></span></div></figure>
       </div>
 
       <div class="wide">
@@ -154,7 +182,8 @@
           <h3 class="h3"><span class="tag">Sur ordinateur aussi</span>Votre semaine d'un coup d'œil</h3>
           <p>L'agenda montre vos séances et vos disponibilités. Il se synchronise avec <b>Google Agenda</b> dans les deux sens : vos cours apparaissent dans votre agenda, et vos rendez-vous perso bloquent automatiquement vos créneaux sur le site.</p>
         </div>
-        <figure class="browser"><span class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="media/agenda.jpg" alt="Agenda de la semaine dans l'espace coach" width="1600" height="1000" loading="lazy"></figure>
+        <figure class="browser browser--fx"><span class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="media/agenda.jpg" alt="Agenda de la semaine dans l'espace coach" width="1600" height="1000" loading="lazy">
+          <span class="fx-badge" aria-hidden="true"><svg class="fx-badge__sync" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg><span><b>Google Agenda</b><small>Synchronisé à l'instant</small></span></span></figure>
       </div>
 
       <div class="wide">
@@ -162,14 +191,15 @@
           <h3 class="h3"><span class="tag">Vos chiffres</span>Revenu, club et occupation, sans tableur</h3>
           <p>À la semaine, au mois ou à l'année : votre revenu, ce que vous devez à chaque club (au pourcentage, à l'heure, à la séance ou au forfait), vos séances, vos nouveaux élèves, votre taux d'occupation et votre <b>note de coaching</b> sur 5.</p>
         </div>
-        <figure class="browser"><span class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="media/statistiques.jpg" alt="Statistiques du mois dans l'espace coach" width="1600" height="1000" loading="lazy"></figure>
+        <figure class="browser browser--fx"><span class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="media/statistiques.jpg" alt="Statistiques du mois dans l'espace coach" width="1600" height="1000" loading="lazy">
+          <span class="fx-stat" aria-hidden="true"><small>Revenu du mois</small><b data-count="4220">4 220 €</b><span class="fx-stat__bars"><i style="--h:.45"></i><i style="--h:.6"></i><i style="--h:.5"></i><i style="--h:.75"></i><i style="--h:.68"></i><i style="--h:1"></i></span><em>+18 % vs mois dernier</em></span></figure>
       </div>
 
       <div class="grid4">
-        <div class="mini"><h4>Vous modifiez tout seul</h4><p>Textes, photos, couleurs, prix, horaires : sans appeler personne.</p></div>
-        <div class="mini"><h4>Avis vérifiés</h4><p>Après chaque séance, l'élève note en un geste. Votre note sur 5 s'affiche sur votre site.</p></div>
-        <div class="mini"><h4>Hébergé en Europe</h4><p>Données sécurisées et sauvegardées, conformes au RGPD.</p></div>
-        <div class="mini"><h4>Partage en un geste</h4><p>Lien prêt à envoyer sur WhatsApp, QR code, story Instagram et affiche pour le club.</p></div>
+        <div class="mini"><span class="mini__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><h4>Vous modifiez tout seul</h4><p>Textes, photos, couleurs, prix, horaires : sans appeler personne.</p></div>
+        <div class="mini"><span class="mini__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg></span><h4>Avis vérifiés</h4><p>Après chaque séance, l'élève note en un geste. Votre note sur 5 s'affiche sur votre site.</p></div>
+        <div class="mini"><span class="mini__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></span><h4>Hébergé en Europe</h4><p>Données sécurisées et sauvegardées, conformes au RGPD.</p></div>
+        <div class="mini"><span class="mini__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2M20 14v6h-6M17 17v3"/></svg></span><h4>Partage en un geste</h4><p>Lien prêt à envoyer sur WhatsApp, QR code, story Instagram et affiche pour le club.</p></div>
       </div>
     </div>
   </section>
@@ -180,9 +210,9 @@
       <p class="kicker">Comment ça se passe</p>
       <h2 class="h2">On s'occupe de la mise en place</h2>
       <ol class="steps">
-        <li><span class="steps__n">1</span><h3>On échange 20 minutes</h3><p>Vos prestations, vos tarifs, vos clubs, vos horaires. Vous envoyez vos photos et votre logo si vous en avez un.</p></li>
-        <li><span class="steps__n">2</span><h3>On construit votre site</h3><p>À vos couleurs, avec vos textes. Vous le testez et demandez les retouches avant la mise en ligne.</p></li>
-        <li><span class="steps__n">3</span><h3>Vous partagez votre lien</h3><p>En bio Instagram, sur WhatsApp, à vos élèves. Les réservations arrivent dans votre espace coach.</p></li>
+        <li><span class="steps__n">1</span><svg class="steps__ic steps__ic--call" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"/><path class="w1" d="M15 3.5a6 6 0 0 1 5.5 5.5"/><path class="w2" d="M15 7a2.5 2.5 0 0 1 2 2"/></svg><h3>On échange 20 minutes</h3><p>Vos prestations, vos tarifs, vos clubs, vos horaires. Vous envoyez vos photos et votre logo si vous en avez un.</p></li>
+        <li><span class="steps__n">2</span><svg class="steps__ic steps__ic--build" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18"/><rect class="b1" x="6" y="11" width="5" height="6" rx="1"/><rect class="b2" x="13" y="11" width="5" height="2.5" rx="1"/><rect class="b3" x="13" y="14.5" width="5" height="2.5" rx="1"/></svg><h3>On construit votre site</h3><p>À vos couleurs, avec vos textes. Vous le testez et demandez les retouches avant la mise en ligne.</p></li>
+        <li><span class="steps__n">3</span><svg class="steps__ic steps__ic--send" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3L3 10.5l7 2.5 2.5 7z"/><path d="M21 3l-11 10"/></svg><h3>Vous partagez votre lien</h3><p>En bio Instagram, sur WhatsApp, à vos élèves. Les réservations arrivent dans votre espace coach.</p></li>
       </ol>
     </div>
   </section>
