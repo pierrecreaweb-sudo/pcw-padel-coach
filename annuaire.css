@@ -1,0 +1,101 @@
+/* Annuaire des coachs (pcwpadel.fr/coachs/) — complète sales.css */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.top__coach { margin-left: 12px; }
+@media (min-width: 761px) { .top__coach { display: none; } }
+
+/* ---------- Accroche + recherche ---------- */
+.dir-hero { position: relative; overflow: hidden; padding-block: 64px 56px; color: var(--on-dark);
+  background: radial-gradient(120% 90% at 85% 0%, var(--brand-2) 0%, var(--brand) 45%, var(--deep) 100%); }
+.dir-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .1;
+  background:
+    linear-gradient(90deg, transparent calc(50% - 1px), #fff calc(50% - 1px), #fff calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(0deg, transparent calc(30% - 1px), #fff calc(30% - 1px), #fff calc(30% + 1px), transparent calc(30% + 1px)); }
+.dir-hero .wrap { position: relative; }
+.dir-hero h1 { font-size: clamp(40px, 6vw, 72px); margin-bottom: 16px; }
+.dir-hero .lead { margin-bottom: 28px; }
+.dir-search { display: flex; gap: 10px; max-width: 720px; padding: 8px; border-radius: 999px; background: #fff; box-shadow: 0 24px 50px rgba(0, 0, 0, .3); }
+.dir-search__field { flex: 1; display: flex; align-items: center; gap: 10px; min-width: 0; padding-left: 16px; }
+.dir-search__field svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; }
+.dir-search input { flex: 1; min-width: 0; height: 48px; border: 0; outline: none; background: none; font: 500 17px/1.2 var(--f-body); color: var(--ink); }
+.dir-search input::-webkit-search-cancel-button { cursor: pointer; }
+.dir-search:focus-within { box-shadow: 0 24px 50px rgba(0, 0, 0, .3), 0 0 0 4px rgba(228, 245, 91, .5); }
+.dir-cities { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.dir-cities button { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .06); color: var(--on-dark); font: 600 14px var(--f-body); cursor: pointer; }
+.dir-cities button small { opacity: .65; }
+.dir-cities button[aria-pressed="true"], .dir-cities button:hover { background: var(--ball); border-color: var(--ball); color: var(--brand); }
+@media (max-width: 560px) {
+  .dir-hero { padding-block: 40px 36px; }
+  .dir-search { flex-direction: column; border-radius: 20px; }
+  .dir-search__field { padding: 0 8px; }
+  .dir-search .btn { width: 100%; }
+}
+
+/* ---------- Filtres ---------- */
+.dir-results { padding-top: 40px; }
+.dir-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-bottom: 14px; }
+.dir-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.dir-filters button { min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); font: 700 15px var(--f-body); cursor: pointer; transition: background-color .15s, border-color .15s, color .15s; }
+.dir-filters button:hover { border-color: var(--brand-2); }
+.dir-filters button[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: #fff; }
+.dir-sort { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; color: var(--muted); }
+.dir-sort select { min-height: 42px; padding: 0 36px 0 14px; border-radius: 12px; border: 1.5px solid var(--line); background: var(--card); font: 600 15px var(--f-body); color: var(--ink); }
+.dir-count { min-height: 1.6em; margin: 0 0 18px; color: var(--muted); font-weight: 600; }
+@media (max-width: 640px) {
+  .dir-filters { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--gr)) 0 calc(-1 * var(--gl)); padding: 2px var(--gr) 6px var(--gl); scrollbar-width: none; }
+  .dir-filters::-webkit-scrollbar { display: none; }
+  .dir-filters button { flex: none; }
+}
+
+/* ---------- Cartes des coachs ---------- */
+.dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+.coach-card { display: flex; flex-direction: column; min-width: 0; border-radius: 20px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(14, 42, 82, .06);
+  transition: transform .3s cubic-bezier(.2, .75, .2, 1), box-shadow .3s; animation: card-in .6s cubic-bezier(.2, .75, .2, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes card-in { from { opacity: 0; translate: 0 24px; } }
+@media (hover: hover) { .coach-card:hover { transform: translateY(-6px); box-shadow: 0 26px 50px rgba(14, 42, 82, .16); } }
+.coach-card__media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; text-decoration: none;
+  background: radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--c) 60%, #4F8EF7), var(--c) 55%, color-mix(in srgb, var(--c) 60%, #000)); }
+.coach-card__media::before { content: ""; position: absolute; inset: 0; opacity: .14; pointer-events: none;
+  background: linear-gradient(90deg, transparent calc(50% - 1px), #fff calc(50% - 1px), #fff calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(0deg, transparent calc(50% - 1px), #fff calc(50% - 1px), #fff calc(50% + 1px), transparent calc(50% + 1px)); }
+.coach-card__media img { width: 100%; height: 100%; object-fit: cover; transition: scale .5s cubic-bezier(.2, .75, .2, 1); }
+@media (hover: hover) { .coach-card:hover .coach-card__media img { scale: 1.05; } }
+.coach-card__ini { position: absolute; inset: 0; display: grid; place-items: center; font: 900 64px/1 var(--f-display); font-stretch: 112%; color: var(--a); letter-spacing: .02em; }
+.coach-card__city { position: absolute; left: 14px; bottom: 14px; padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .94); color: var(--brand); font-weight: 700; font-size: 14px; }
+.coach-card__body { flex: 1; padding: 18px 20px 6px; display: grid; align-content: start; gap: 8px; }
+.coach-card h3 { margin: 0; font: 800 22px/1.2 var(--f-display); color: var(--brand); }
+.coach-card h3 a { color: inherit; text-decoration: none; }
+.coach-card h3 a:hover { text-decoration: underline; }
+.coach-card__rating { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 14px; color: var(--muted); }
+.coach-card__rating b { color: var(--ink); }
+.coach-card__rating--new { display: inline-flex; width: max-content; padding: 3px 10px; border-radius: 999px; background: var(--soft); color: var(--brand-2); font-weight: 700; font-size: 13px; }
+.cstars { display: inline-flex; gap: 2px; }
+.cstars i { width: 15px; height: 15px; background: #FFB800; clip-path: polygon(50% 0, 61.8% 35.3%, 100% 35.3%, 69.1% 57.1%, 80.9% 92.7%, 50% 70.6%, 19.1% 92.7%, 30.9% 57.1%, 0 35.3%, 38.2% 35.3%); }
+.cstars i.off { background: #D9E1EC; }
+.coach-card__tagline { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.coach-card__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.coach-card__tags span { padding: 4px 10px; border-radius: 8px; background: var(--soft); color: var(--brand); font-weight: 700; font-size: 13px; }
+.coach-card__clubs { display: flex; align-items: flex-start; gap: 6px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.4; }
+.coach-card__clubs svg { width: 16px; height: 16px; flex: none; margin-top: 2px; fill: none; stroke: var(--brand-2); stroke-width: 2; }
+.coach-card__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px 18px; margin-top: 8px; border-top: 1px solid var(--line); }
+.coach-card__price { margin: 0; line-height: 1.1; }
+.coach-card__price small { display: block; color: var(--muted); font-size: 12px; font-weight: 600; }
+.coach-card__price b { font: 900 22px/1.1 var(--f-display); color: var(--brand); }
+
+/* Chargement */
+.coach-card--skel { min-height: 420px; animation: none; background: linear-gradient(100deg, var(--card) 30%, var(--soft) 50%, var(--card) 70%) 0 0 / 300% 100%; animation: skel 1.4s linear infinite; }
+@keyframes skel { to { background-position: -300% 0; } }
+
+/* États vides */
+.dir-empty { grid-column: 1 / -1; display: grid; justify-items: center; gap: 12px; padding: 56px 24px; border-radius: 22px; background: var(--card); border: 1px dashed var(--line); text-align: center; }
+.dir-empty h2 { margin: 0; font: 800 clamp(22px, 3vw, 30px)/1.2 var(--f-display); color: var(--brand); }
+.dir-empty p { margin: 0 0 8px; max-width: 34em; color: var(--muted); }
+.dir-empty__ball { width: 54px; height: 54px; border-radius: 50%; background: var(--ball); box-shadow: inset -10px -8px 0 rgba(0, 0, 0, .12); animation: dir-bounce 1.6s ease-in-out infinite; }
+@keyframes dir-bounce { 50% { translate: 0 -14px; } }
+
+/* Bandeau coachs */
+.dir-coach__in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; }
+.dir-coach__in > div { max-width: 640px; }
+.dir-coach .h2 { margin-bottom: 14px; }
+.dir-coach p:not(.kicker) { margin: 0; color: var(--on-dark-muted); }
+
+@media (prefers-reduced-motion: reduce) { .coach-card, .dir-empty__ball, .coach-card--skel { animation: none; } }

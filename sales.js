@@ -3,9 +3,9 @@
 // Clé d'accès : à créer sur https://web3forms.com avec l'adresse qui doit recevoir les demandes.
 const WEB3FORMS_KEY = "4273a7e4-66ef-4071-9618-dbbcfd80f02b";
 
-// Base Supabase de PCW Padel Coach (à remplir à la mise en production) :
-// les avis que les coachs écrivent depuis leur espace, une fois validés, s'affichent automatiquement.
-const PCW_SUPABASE = { url: "", anonKey: "" };
+// Base Supabase de PCW Padel Coach : se règle dans pcw-config.js (commun avec l'annuaire).
+// Les avis que les coachs écrivent depuis leur espace, une fois validés, s'affichent automatiquement.
+const PCW_SUPABASE = window.PCW_SUPABASE || { url: "", anonKey: "" };
 
 // Avis de vos clients (section « Ils l'utilisent »), en plus de ceux écrits par les coachs dans leur espace.
 // La section reste cachée tant qu'il n'y a aucun avis : ajoutez uniquement de vrais avis,
