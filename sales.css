@@ -686,3 +686,43 @@ html.anim .is-in .review__stars i:nth-child(5) { transition-delay: calc(var(--d,
 .on-light .logo__mark--on-light { display: block; }
 .on-light .logo__txt small { color: #1F5BD8; }
 @media (max-width: 360px) { .logo__txt b { font-size: 17px; } }
+
+/* ---------- Mise en avant de l'annuaire padelcoachs.fr ---------- */
+.wide--dir .wide__text a { color: var(--brand-2); }
+.dir-perks { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.dir-perks li { position: relative; padding-left: 30px; font-weight: 600; color: var(--ink); }
+.dir-perks li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--ball); color: var(--brand); font: 900 12px/1 var(--f-body); }
+.dir-mock .browser__bar { align-items: center; }
+.dir-mock__url { margin-left: 14px; padding: 4px 16px; border-radius: 999px; background: #fff; color: var(--muted); font-size: 13px; font-weight: 600; }
+.dir-mock__body { padding: 22px; background: linear-gradient(180deg, var(--brand) 0 96px, var(--surface) 96px); }
+.dir-mock__search { display: flex; align-items: center; gap: 10px; max-width: 420px; padding: 6px 6px 6px 16px; border-radius: 999px; background: #fff; box-shadow: 0 12px 30px rgba(0, 0, 0, .25); font-weight: 600; color: var(--ink); }
+.dir-mock__search svg { width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 2.4; stroke-linecap: round; }
+.dir-mock__search span { flex: 1; }
+.dir-mock__search b { padding: 9px 16px; border-radius: 999px; background: var(--ball); color: var(--brand); font-size: 14px; }
+.dir-mock__cards { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; margin-top: 26px; align-items: start; }
+.dir-mock__card { position: relative; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); }
+.dir-mock__card--you { border: 2px solid var(--ball); box-shadow: 0 0 0 6px rgba(228, 245, 91, .35), 0 20px 40px rgba(14, 42, 82, .18); }
+.dir-mock__you { position: absolute; z-index: 1; top: 10px; right: 10px; padding: 5px 10px; border-radius: 999px; background: var(--ball); color: var(--brand); font-weight: 800; font-size: 12px; }
+.dir-mock__media { position: relative; aspect-ratio: 16 / 8; display: grid; place-items: center; background: radial-gradient(120% 120% at 100% 0%, var(--brand-2), var(--brand) 60%, var(--deep)); }
+.dir-mock__media span { font: 900 40px/1 var(--f-display); color: var(--ball); }
+.dir-mock__media em { position: absolute; left: 10px; bottom: 10px; padding: 4px 10px; border-radius: 999px; background: #fff; color: var(--brand); font-style: normal; font-weight: 700; font-size: 12px; }
+.dir-mock__info { display: grid; gap: 7px; padding: 12px 14px 14px; }
+.dir-mock__info strong { font: 800 18px/1.2 var(--f-display); color: var(--brand); }
+.dir-mock__stars { color: #FFB800; font-size: 14px; letter-spacing: 1px; }
+.dir-mock__stars small { color: var(--muted); letter-spacing: 0; font-weight: 600; }
+.dir-mock__tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.dir-mock__tags i { padding: 3px 8px; border-radius: 6px; background: var(--soft); color: var(--brand); font-style: normal; font-weight: 700; font-size: 11px; }
+.dir-mock__foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--line); }
+.dir-mock__foot small { color: var(--muted); font-size: 12px; }
+.dir-mock__foot small b { display: block; font: 900 18px/1 var(--f-display); color: var(--brand); }
+.dir-mock__btn { padding: 8px 14px; border-radius: 999px; background: var(--ball); color: var(--brand); font-size: 13px; }
+.dir-mock__card--ghost { opacity: .55; }
+.dir-mock__card--ghost .dir-mock__media { background: #C9D7EC; }
+.dir-mock__card--ghost .dir-mock__info i { display: block; height: 10px; border-radius: 5px; background: #DCE4EF; }
+.dir-mock__card--ghost .dir-mock__info i:nth-child(1) { width: 70%; height: 14px; }
+.dir-mock__card--ghost .dir-mock__info i:nth-child(3) { width: 50%; }
+html.anim .browser--fx.is-in .dir-mock__card--you, html.anim .dir-mock.is-in .dir-mock__card--you { animation: you-pop .8s var(--spring) .6s both; }
+@keyframes you-pop { from { opacity: 0; transform: translateY(16px) scale(.94); } }
+html.anim .dir-mock.is-in .dir-mock__you { animation: you-badge 2.4s ease-in-out 1.4s infinite; }
+@keyframes you-badge { 50% { transform: scale(1.08); } }
+@media (max-width: 520px) { .dir-mock__cards { grid-template-columns: 1fr; } .dir-mock__card--ghost { display: none; } .dir-mock__body { padding: 16px; } }
