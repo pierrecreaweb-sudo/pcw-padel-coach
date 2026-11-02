@@ -726,3 +726,6 @@ html.anim .browser--fx.is-in .dir-mock__card--you, html.anim .dir-mock.is-in .di
 html.anim .dir-mock.is-in .dir-mock__you { animation: you-badge 2.4s ease-in-out 1.4s infinite; }
 @keyframes you-badge { 50% { transform: scale(1.08); } }
 @media (max-width: 520px) { .dir-mock__cards { grid-template-columns: 1fr; } .dir-mock__card--ghost { display: none; } .dir-mock__body { padding: 16px; } }
+
+/* Cadrage du portrait choisi par le coach */
+img.review__ph { object-position: var(--fx, 50%) var(--fy, 50%); transform: scale(var(--fz, 1)); transform-origin: var(--fx, 50%) var(--fy, 50%); }

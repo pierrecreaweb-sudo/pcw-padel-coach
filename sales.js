@@ -1,4 +1,11 @@
 // Page de vente PCW Padel Coach.
+// Cadrage choisi par le coach (point gardé au centre, zoom), appliqué par variables CSS.
+function cropStyle(c) {
+  if (!c || typeof c !== "object") return "";
+  const n = (v, lo, hi, d) => { v = Number(v); return Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : d; };
+  return ` style="--fx:${n(c.x, 0, 100, 50)}%;--fy:${n(c.y, 0, 100, 50)}%;--fz:${n(c.z, 1, 3, 1)}"`;
+}
+
 // Les demandes du formulaire sont envoyées par email via Web3Forms (gratuit, sans serveur).
 // Clé d'accès : à créer sur https://web3forms.com avec l'adresse qui doit recevoir les demandes.
 const WEB3FORMS_KEY = "4273a7e4-66ef-4071-9618-dbbcfd80f02b";
@@ -139,7 +146,7 @@ const AVIS = [
         ${stars(a.note)}
         <blockquote>${esc(a.texte)}</blockquote>
         <figcaption>
-          ${safePhoto(a.photo) ? `<img class="review__ph" src="${esc(a.photo)}" alt="" width="48" height="48" loading="lazy">` : `<span class="review__ph" aria-hidden="true">${esc(initials(a.nom))}</span>`}
+          ${safePhoto(a.photo) ? `<img class="review__ph" src="${esc(a.photo)}" alt="" width="48" height="48" loading="lazy"${cropStyle(a.photo_crop)}>` : `<span class="review__ph" aria-hidden="true">${esc(initials(a.nom))}</span>`}
           <span><b>${esc(a.nom)}</b><small>${esc([a.metier, a.lieu].filter(Boolean).join(" · "))}</small>${a.depuis ? `<small>Client depuis ${esc(a.depuis)}</small>` : ""}</span>
         </figcaption>
       </figure>`).join("");
