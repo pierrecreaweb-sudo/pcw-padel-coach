@@ -671,3 +671,18 @@ html.anim .is-in .review__stars i:nth-child(2) { transition-delay: calc(var(--d,
 html.anim .is-in .review__stars i:nth-child(3) { transition-delay: calc(var(--d, 0ms) + 410ms); }
 html.anim .is-in .review__stars i:nth-child(4) { transition-delay: calc(var(--d, 0ms) + 490ms); }
 html.anim .is-in .review__stars i:nth-child(5) { transition-delay: calc(var(--d, 0ms) + 570ms); }
+
+/* ---------- Logo PCW Padel Coach (version fond sombre / fond clair choisie selon le fond) ---------- */
+.logo { gap: 11px; }
+.logo__mark { display: block; width: 22px; height: 27px; flex: none; transition: transform .3s cubic-bezier(.3, 1.5, .5, 1); }
+.logo:hover .logo__mark { transform: rotate(-8deg) scale(1.06); }
+.logo__mark--on-light { display: none; }
+.logo__txt { display: grid; gap: 3px; line-height: 1; }
+.logo__txt small { font: 800 10px/1 var(--f-body); letter-spacing: .34em; color: var(--ball); }
+.logo__txt b { font: 800 19px/1 var(--f-display); font-stretch: 100%; letter-spacing: -.01em; color: inherit; }
+/* Sur fond clair : P marine, « PCW » bleu, texte marine */
+.on-light .logo { color: #0E1B2C; }
+.on-light .logo__mark--on-dark { display: none; }
+.on-light .logo__mark--on-light { display: block; }
+.on-light .logo__txt small { color: #1F5BD8; }
+@media (max-width: 360px) { .logo__txt b { font-size: 17px; } }

@@ -3,7 +3,7 @@
 // Clé d'accès : à créer sur https://web3forms.com avec l'adresse qui doit recevoir les demandes.
 const WEB3FORMS_KEY = "4273a7e4-66ef-4071-9618-dbbcfd80f02b";
 
-// Base Supabase de PCW Padel Coach : se règle dans pcw-config.js (commun avec l'annuaire).
+// Base Supabase de PCW Padel Coach : se règle dans pcw-config.js.
 // Les avis que les coachs écrivent depuis leur espace, une fois validés, s'affichent automatiquement.
 const PCW_SUPABASE = window.PCW_SUPABASE || { url: "", anonKey: "" };
 
@@ -156,6 +156,11 @@ const AVIS = [
       if (Array.isArray(rows) && rows.length) renderAvis(rows.concat(AVIS));
     }).catch(() => { /* la page reste complète sans les avis */ });
   }
+
+  // Lien discret vers l'annuaire des coachs (site séparé), seulement s'il est en ligne.
+  const dirUrl = String(window.PCW_DIRECTORY_URL || "");
+  const footDir = document.getElementById("foot-annuaire");
+  if (footDir && /^https:\/\//.test(dirUrl)) { footDir.querySelector("a").href = dirUrl; footDir.hidden = false; }
 
   // Bouton fixe sur téléphone : masqué tant que l'accroche ou le formulaire sont visibles.
   const cta = document.querySelector(".mobile-cta");
