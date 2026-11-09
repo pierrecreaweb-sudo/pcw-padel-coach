@@ -42,8 +42,10 @@
       var key = norm(k);
       if (key.indexOf("{}") < 0) { D.exact[key] = dict[k]; return; }
       var re = new RegExp("^" + key.split("{}").map(escRe).join("((?:[^.!?;]|\\d\\.\\d){1,90}?)") + "$");
-      D.pats.push([re, dict[k]]);
+      D.pats.push([re, dict[k], key.replace(/\{\}/g, "").length]);
     });
+    // Les modèles les plus précis (le plus de texte fixe) passent avant les plus généraux.
+    D.pats.sort(function (a, b) { return b[2] - a[2]; });
     (rules || []).forEach(function (r) { D.rules.push(r); });
   }
 
