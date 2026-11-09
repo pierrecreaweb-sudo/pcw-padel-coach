@@ -182,7 +182,9 @@
     var im = doc.querySelectorAll('img[src*="-fr.jpg"]');
     for (var j = 0; j < im.length; j++) im[j].setAttribute("src", im[j].getAttribute("src").replace("-fr.jpg", "-" + lang + ".jpg"));
     // La vidéo de présentation existe dans chaque langue (presentation-xx.mp4).
-    var vs = doc.querySelectorAll("video source[data-vid]");
+    var vs = lang === "fr" ? [] : doc.querySelectorAll("video source[data-vid]");
+    var pv = lang === "fr" ? [] : doc.querySelectorAll("video[data-poster]");
+    for (var q = 0; q < pv.length; q++) pv[q].setAttribute("poster", pv[q].getAttribute("data-poster").replace("{lang}", lang));
     for (var k = 0; k < vs.length; k++) {
       var src = vs[k].getAttribute("data-vid").replace("{lang}", lang);
       vs[k].setAttribute("src", src); if (vs[k].parentNode && vs[k].parentNode.load) vs[k].parentNode.load();
